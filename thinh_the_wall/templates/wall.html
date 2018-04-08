@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+</head>
+<body>
+	<h1>Wlecome {{disname[0]['fname']}} {{disname[0]['lname']}}</h1>
+	<form action="/logout">
+		<button>Log Out</button>
+	</form >
+
+	
+		
+	<form action="/process" method="post">
+		<h2>Post a Message</h2>
+		<input type="text" name="message">
+		<button>submit</button>
+	</form>
+
+
+	{% for x in hmsfnjoin: %}
+		<p>{{x.name}} {{x.created_at}}</p>
+		  <h3>{{x.message}}</h3>
+		  
+  			{% for i in cmnt: %}
+
+  				{% if i.mscmid == x.msid: %}
+  					<p>{{i.comment}} - {{i.username}} - {{i.created}}</p>
+  				{% endif %}
+
+  			{% endfor %}
+  		<form action="/comment" method="post">
+  			<input type="hidden" name="hcomment" value="{{x.msid}}">
+			<input type="text" name="comment">
+			<button>add comment</button>
+		</form>
+	{% endfor %}
+
+
+</body>
+</html>
